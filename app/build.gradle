@@ -18,6 +18,10 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
+        ndk {
+            // Filter for architectures supported by Flutter.
+            abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86_64'
+        }
     }
 
     buildTypes {
@@ -25,10 +29,13 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        profile {
+            initWith debug
+        }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility 11
+        targetCompatibility 11
     }
     kotlinOptions {
         jvmTarget = '1.8'
@@ -47,6 +54,9 @@ android {
 }
 
 dependencies {
+    debugImplementation 'com.androidappwithfluttermodule.flutter_module:flutter_debug:1.0'
+    profileImplementation 'com.androidappwithfluttermodule.flutter_module:flutter_profile:1.0'
+    releaseImplementation 'com.androidappwithfluttermodule.flutter_module:flutter_release:1.0'
 
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
